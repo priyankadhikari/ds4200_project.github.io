@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Wildfire Study</title>
+    <link href="updated_style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+</head>
+<body>
+    <h1></h1>
+    <h1>PATTERNS AND TRENDS IN U.S. WILDFIRES OVER 24 YEARS</h1>
+    <h3>Priyanka Adhikari, Ruchira Banerjee, Simone Kaplunov, Luana Siyoum</h3>
+    <h1>INTRODUCTION AND SUMMARY</h1>
+    <h3>Topic Introduction</h3>
+
+    <p>
+      Our topic is focused on wildfires across the United States that took place between 1992 and 2015. U.S. wildfires are important to analyze as they impact 
+      people, wildlife, the economy, and communities/ecosystems across the country. They are the cause of extensive harm from 
+      spreading air pollution to long-term vegetation damage. Therefore, analyzing historic wildfires could help make informed,
+      preventative decisions about future wildfires. With climate change on the rise, it will also be interesting to see wildfire 
+      incidents over time. It's important to consider the locations, causes, dates, sizes, and other patterns of past wildfires 
+      to perhaps be able to assess risks, understand causes, and improve prevention strategies. Overall, analyzing wildfires 
+      could help with both immediate damage responses to long-term planning for reducing their effects or limiting their 
+      occurrences. This information can then be especially useful to policymakers but also the general public as they can be 
+      directly or indirectly affected. 
+      </p>
+
+    <h3>Summary and Future Work</h3>
+
+    <p>Overall, some of the main takeaways we've gathered from our analysis include that CA, GA, and TX had the most wildfires, which is a helpful statistic 
+      to policymakers as they can raise awareness in these states and implement policies to prevent future fires. We also noted a large overall decrease in 
+      wildfire occurrences from 2006 to 2015, indicating that some progress may have already started in these states. One of the biggest takeaways was that 
+      most wildfires are caused by human actions, whether it be a result of campfires, smoking, or railroads, this ultimately means that we need to prevent 
+      these accidents in the future. Future work includes creating a dashboard to let us explore how different causes of fire relate between states, including county-level data in visualizations for more intricate analyses, and maintaining a live database of wildfires for an up-to-date dashboard.
+      </p>
+    
+    <h3>References</h3>
+    <p>Our analysis of patterns and trends in US wildfires over 24 years is informed by the understanding of contextual 
+      factors and consequences associated with wildfires. <a href="https://www.rff.org/publications/explainers/wildfires-in-the-united-states-101-context-and-consequences/">Resources for the Future</a> provides insights into the broader 
+      understanding of wildfires in the United States, highlighting their increasing severity, economic impact, and the 
+      role of climate change in the growing wildfire risk. The understanding is further emphasized by <a href="https://www.washingtonpost.com/climate-environment/interactive/2022/wildfire-risk-map-us/">The Washington Post</a> 
+      which goes into the in-depth analysis of wildfire risk, revealing that nearly 80 million properties across the 
+      country suffer significant exposure to fire, with projections that indicate a growing threat to communities in the 
+      coming decades. By incorporating these insights into our project, we aim to not only analyze historical wildfire data 
+      but also contribute to informed decision-making for future wildfire prevention and mitigation strategies. Our goal is to 
+      provide policymakers and the general public with actionable insights derived from comprehensive data analysis and 
+      visualization.</p>
+      
+    <h1>WILDFIRE DATA</h1>
+    <h3>Introduction to the data</h3>
+
+    <p> The wildfire dataset we used was compiled from multiple federal, state, and local fire reports. 
+        The dataset was downloaded from Kaggle, however the original dataset format was a sqlite database, so it was necessary to convert the sqlite database to a pandas dataframe, 
+        then save the dataframe as a csv file to make the data easier to work with. 
+        The dataset consists of 1.88 million geo-referenced wildfire records, and represents 140 million acres of land burned that occurred in the United States from 1992 to 2015. 
+        The dataframe initially had 51 columns, and to clean our data, we went through the raw data and selected relevant variables, which included the following features:
+    </p>  
+
+        <div class="center">
+        <table class="tg">
+            <thead>
+              <tr>
+                <th class="tg-0lax">Variable Name</th>
+                <th class="tg-0lax">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="tg-0lax">fire_name</td>
+                <td class="tg-0lax"> Name of the incident, from the fire report (primary) or ICS-209 report (secondary). </td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">fire_year</td>
+                <td class="tg-0lax">Calendar year in which the fire was discovered or confirmed to exist.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">discovery_DOY</td>
+                <td class="tg-0lax">Day of year on which the fire was discovered or confirmed to exist.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">stat_cause_code</td>
+                <td class="tg-0lax">Code for the (statistical) cause of the fire.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">stat_cause_descr</td>
+                <td class="tg-0lax">Description of the (statistical) cause of the fire.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">cont_date</td>
+                <td class="tg-0lax">Date on which the fire was declared contained or otherwise controlled.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">fire_size</td>
+                <td class="tg-0lax">Estimate of acres within the final perimeter of the fire.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">fire_size_class</td>
+                <td class="tg-0lax">Code for fire size based on the number of acres within the final fire perimeter expenditures</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">latitude</td>
+                <td class="tg-0lax">Latitude for point location of the fire (decimal degrees).</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">longitude</td>
+                <td class="tg-0lax">Longitude for point location of the fire (decimal degrees).</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">state</td>
+                <td class="tg-0lax">Two-letter alphabetic code for the state in which the fire burned (or originated), based on the nominal designation in the fire report.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">county</td>
+                <td class="tg-0lax">County, or equivalent, in which the fire burned (or originated), based on nominal designation in the fire report.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">FIPS_code</td>
+                <td class="tg-0lax">Three-digit code from the Federal Information Process Standards (FIPS) publication 6-4 for representation of counties and equivalent entities.</td>
+              </tr>
+              <tr>
+                <td class="tg-0lax">FIPS_name</td>
+                <td class="tg-0lax">County name from the FIPS publication 6-4 for representation of counties and equivalent entities.
+                </td>
+              </tr>
+            </tbody>
+            </table>
+        </div>
+        <p> After cleaning and dropping rows with invalid values, our new dataframe had 14 columns and 1880464 rows. 
+            In conjunction with our wildfire dataset, we used geographical information from <a href="https://www.naturalearthdata.com/downloads/">Natural Earth</a> in order to 
+            make our maps to better visualize the wildfire locations.
+
+            To gain a high-level understanding of our data, we looked at the average fire size for each of the different causes of fire outlined in the dataset. 
+            As seen by the graph below, the largest fires seen in our dataset were due to lightning.
+        </p>
+        <div class = 'image'>
+          <iframe src="img_plot.png" width="800" height="800"></iframe>
+        </div>
+
+        <p>
+        </p>
+        
+        <h1>INTERACTIVE VISUALIZATIONS</h1>
+
+        <div class = 'center'>
+          <iframe src="dashboard_html.html" width="1000px" height="600px" frameborder="0"></iframe>
+        </div>
+        
+        <h1>STATIC VISUALIZATIONS</h1>
+        <h3>Map of Wildfire Sizes Across the U.S.</h3>
+        
+        <div class = 'image'>
+          <iframe src="wildfire_map.png" width="100%" height="500px" frameborder="0"></iframe>
+        </div>
+        <div class = 'text'>
+          <p> Here we present a map of wildfire sizes across the U.S., specifically representing fire sizes
+            by acres within the final perimeter of the fire. A red color map is used to signify
+            smaller fires (lighter red) to larger fires (darker red). We can identify that Alaska has larger fires overall,
+            but the amount doesn't cover the whole state. This is somewhat surprising since Alaska is a relatively cold state
+            simultaneously understandable that the fires are larger perhaps due to less population and vast nature. In general,
+            this map allows us to see that there are smaller fires on the coasts (specifically the west and northeast),
+            and there are medium sized fires more towards the middle of the U.S. This could be due to population reasons
+            and access to coast water/coast climate. 
+          </p>
+        </div>
+
+        <h3>Line Chart of Wildfire Occurrences over the Years</h3>
+
+        <div class = 'container'>
+          <div class = 'text'>
+              <p> Moreover, we wanted to examine wildfire occurrences over the years (from 1992 to 2015).
+                Since we are utilizing Altair, it's important to note the restriction of having chosen a random 5000 data points
+                as opposed to the whole data set. 
+              </p>
+              <p> The line chart shows the peak amount of fires occurring around 2006, while the
+                lowest amount of fires was around 1993. In general, the amount of wildfires consistently increases and decreases every few years. 
+                Although there does seem to be an ever so slight increasing trend, which aligns with global warming, but surprisingly not too much.
+              </p>
+          </div>  
+          <div class = 'center'>
+            <iframe src="line_chart_fires.html" width="600px" height="400px" frameborder="0"></iframe>
+          </div>          
+        </div>
+
+        <h3>Bar Chart of Wildfire Occurrences by U.S. State</h3>
+
+        <div class = 'container'>
+          <div class = 'text'>
+              <p> This bar chart allows us to examine the fires by state utilizing D3. We can clearly identify California (189,550), Georgia (168,867), and Texas (142,021)
+                as having the most wildfires, and Vermont (456), Delaware (171), and D.C. (66) as having the least wildfire occurrences.
+                It's interesting that the states with the least amount of wildfires are all in the northeast, which makes sense given the colder climate.
+              </p>
+              <p> 
+                There is clearly a drastic difference between the amount of wildfires overall since it ranges from 66 to 189,550.
+                There also seems to be a steep decrease in wildfire occurrences between the top states, and then the trend has a relatively steady decrease after 50,000 fires.      
+              </p>
+          </div>
+          <div id="plot"></div>
+          <script src='https://d3js.org/d3.v7.min.js'></script>
+          <script src='updated_main_proj_d3.js'></script>
+        </div>
+</body>
+</html>
